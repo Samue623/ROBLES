@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROBLES — Clothing</title>
+<style>
+:root{--bg:#f5f3ef;--ink:#111;--muted:#777;--card:#fff;--line:#ddd}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{position:sticky;top:0;z-index:10;background:rgba(245,243,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{max-width:1200px;margin:auto;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.logo{font-size:25px;font-weight:900;letter-spacing:5px}.cart{border:0;background:#111;color:#fff;padding:12px 17px;border-radius:25px;cursor:pointer}
+.hero{max-width:1200px;margin:auto;padding:70px 22px 55px;display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center}
+.hero h1{font-size:clamp(55px,9vw,110px);line-height:.85;margin:0 0 25px;letter-spacing:-6px}
+.hero p{font-size:18px;color:#555;max-width:520px;line-height:1.6}.btn{display:inline-block;margin-top:15px;padding:15px 23px;background:#111;color:white;text-decoration:none;border-radius:30px;font-weight:bold}
+.hero-art{min-height:410px;border-radius:28px;background:linear-gradient(145deg,#181818,#555);display:flex;align-items:center;justify-content:center;color:#fff;font-size:90px;font-weight:900;letter-spacing:-8px;box-shadow:0 18px 50px #0002}
+section{max-width:1200px;margin:auto;padding:40px 22px 80px}h2{font-size:36px;margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid #e6e3df}.pic{height:290px;background:#e8e5df;display:flex;align-items:center;justify-content:center;font-size:55px;font-weight:900}.product:nth-child(2) .pic{background:#d8d8d8}.product:nth-child(3) .pic{background:#cfc8bd}.product:nth-child(4) .pic{background:#e0ddd7}.info{padding:17px}.name{font-weight:800;font-size:17px}.price{margin-top:8px;color:#555}.buy{width:100%;margin-top:15px;padding:11px;border:0;background:#111;color:white;border-radius:10px;cursor:pointer}
+.about{background:#111;color:white;border-radius:25px;padding:45px}.about p{color:#ccc;line-height:1.7;max-width:700px}
+footer{border-top:1px solid var(--line);padding:30px 22px;color:#666;text-align:center}
+#toast{position:fixed;right:20px;bottom:20px;background:#111;color:white;padding:14px 18px;border-radius:12px;display:none}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:45px}.hero-art{min-height:280px;font-size:65px}.grid{grid-template-columns:repeat(2,1fr)}.pic{height:230px}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.hero h1{letter-spacing:-4px}}
+</style>
+</head>
+<body>
+<header><nav><div class="logo">ROBLES</div><button class="cart" onclick="showCart()">🛒 Carrito (<span id="count">0</span>)</button></nav></header>
+
+<main>
+<div class="hero">
+  <div><h1>VISTE<br>ROBLES.</h1><p>Ropa con carácter. Diseñada para quienes quieren llevar su propio estilo.</p><a class="btn" href="#coleccion">Ver colección</a></div>
+  <div class="hero-art">R</div>
+</div>
+
+<section id="coleccion">
+<h2>Última colección</h2>
+<div class="grid">
+<article class="product"><div class="pic">TEE</div><div class="info"><div class="name">Robles Essential Tee</div><div class="price">RD$ 1,495</div><button class="buy" onclick="add('Robles Essential Tee',1495)">Añadir al carrito</button></div></article>
+<article class="product"><div class="pic">HOOD</div><div class="info"><div class="name">Robles Classic Hoodie</div><div class="price">RD$ 2,995</div><button class="buy" onclick="add('Robles Classic Hoodie',2995)">Añadir al carrito</button></div></article>
+<article class="product"><div class="pic">CAP</div><div class="info"><div class="name">Robles Signature Cap</div><div class="price">RD$ 995</div><button class="buy" onclick="add('Robles Signature Cap',995)">Añadir al carrito</button></div></article>
+<article class="product"><div class="pic">PANT</div><div class="info"><div class="name">Robles Cargo Pants</div><div class="price">RD$ 2,495</div><button class="buy" onclick="add('Robles Cargo Pants',2495)">Añadir al carrito</button></div></article>
+</div>
+</section>
+
+<section><div class="about"><h2>HECHO PARA DESTACAR.</h2><p>ROBLES nace para combinar un estilo limpio, moderno y urbano. Esta demo está lista para convertirse en tu tienda real: puedes cambiar productos, fotos, precios, redes sociales y métodos de pago.</p></div></section>
+</main>
+
+<footer>© 2026 ROBLES — Todos los derechos reservados.</footer>
+<div id="toast"></div>
+<script>
+let cart=[];
+function add(name,price){cart.push({name,price});document.getElementById('count').textContent=cart.length;toast(name+' añadido al carrito 🛒')}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',1800)}
+function showCart(){if(!cart.length){toast('Tu carrito está vacío');return}let total=cart.reduce((s,p)=>s+p.price,0);alert('Carrito ROBLES\\n\\n'+cart.map(p=>'• '+p.name+' — RD$ '+p.price.toLocaleString()).join('\\n')+'\\n\\nTotal: RD$ '+total.toLocaleString())}
+</script>
+</body>
+</html>
